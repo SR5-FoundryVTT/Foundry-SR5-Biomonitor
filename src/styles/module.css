@@ -1,0 +1,49 @@
+
+/* Varibles*/
+:root{
+    --primaryBackground: rgba(0, 0, 0, 0.445);
+    --buttonMain: rgb(83, 1, 1);
+    --buttonlight: rgb(255, 171, 171);
+    --buttonHighlight: rgb(207, 194, 7);
+    --mainHeading: rgb(189, 189, 23);
+    --systemFonts: 'Signika', 'Palatino Linotype', serif;
+    --editorFonts: "klavika-medium";
+}
+/*Main Grid*/
+.grid-monitor {
+    --padding-inline: 1rem;
+    --content-max-width: 900px;
+    --breakout-max-width: 1200px;
+  
+    --breakout-size: calc(
+      (var(--breakout-max-width) - var(--content-max-width)) / 2
+    );
+  
+    display: grid;
+    grid-template-columns:
+      [full-width-start] minmax(var(--padding-inline), 1fr)
+      [breakout-start] minmax(0, var(--breakout-size))
+      [content-start] min(
+        100% - (var(--padding-inline) * 2),
+        var(--content-max-width)
+      )
+      [content-end]
+      minmax(0, var(--breakout-size)) [breakout-end]
+      minmax(var(--padding-inline), 1fr) [full-width-end];
+  }
+
+.grid-monitor > :not(.breakout, .full-width),
+.full-width > :not(.breakout, full-width) {
+    grid-column: content;
+}
+
+.grid-monitor > .breakout {
+    grid-column: breakout;
+}
+
+.grid-monitor > .full-width {
+    grid-column: full-width;
+  
+    display: grid;
+    grid-template-columns: inherit;
+  }
