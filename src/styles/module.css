@@ -1,49 +1,93 @@
 
 /* Varibles*/
 :root{
-    --primaryBackground: rgba(0, 0, 0, 0.445);
-    --buttonMain: rgb(83, 1, 1);
-    --buttonlight: rgb(255, 171, 171);
-    --buttonHighlight: rgb(207, 194, 7);
-    --mainHeading: rgb(189, 189, 23);
-    --systemFonts: 'Signika', 'Palatino Linotype', serif;
-    --editorFonts: "klavika-medium";
+  --primaryBackground: rgba(0, 0, 0, 0.445);
+  --buttonMain: rgb(83, 1, 1);
+  --buttonlight: rgb(255, 171, 171);
+  --buttonHighlight: rgb(207, 194, 7);
+  --mainHeading: rgb(189, 189, 23);
+  --systemFonts: 'Signika', 'Palatino Linotype', serif;
+  --editorFonts: "klavika-medium";
+}
+h1{
+padding: 1.5em;
+color: var(--mainHeading);
+font-family: var(--editorFonts);
+font-size:larger;
+border-color: var(--mainHeading);
+}
+.window-app >section.window-content{
+color: whitesmoke;
+background: none;
+background-image: none;
+width: 330px;
+min-height: 303px;
 }
 /*Main Grid*/
 .grid-monitor {
-    --padding-inline: 1rem;
-    --content-max-width: 900px;
-    --breakout-max-width: 1200px;
   
-    --breakout-size: calc(
-      (var(--breakout-max-width) - var(--content-max-width)) / 2
-    );
-  
-    display: grid;
-    grid-template-columns:
-      [full-width-start] minmax(var(--padding-inline), 1fr)
-      [breakout-start] minmax(0, var(--breakout-size))
-      [content-start] min(
-        100% - (var(--padding-inline) * 2),
-        var(--content-max-width)
-      )
-      [content-end]
-      minmax(0, var(--breakout-size)) [breakout-end]
-      minmax(var(--padding-inline), 1fr) [full-width-end];
-  }
-
-.grid-monitor > :not(.breakout, .full-width),
-.full-width > :not(.breakout, full-width) {
-    grid-column: content;
+  --padding-inline: 4.2em;
+  display: grid;
+  grid-template-columns: [header] 10em;
+    /*[full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--breakout-size))
+    [content-start] min(
+      100% - (var(--padding-inline) * 2),
+      var(--content-max-width)
+    )
+    [content-end]
+    minmax(0, var(--breakout-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];*/
+  background-color: var(--primaryBackground);
+  min-height: auto;
+}
+.header{
+position: sticky;
+z-index: 1;
+grid-column-start: 1;
+grid-column-end: 3;
+}
+.actors-box{
+padding: 0.5em;
+display: grid;
+grid-template-columns: 6em auto;
+border-width: 1px;
+border-style: solid;
+border-color: var(--buttonHighlight)
+}
+.image, img{
+border: none;
+padding: 0.2em;
+max-width: 90px;
+max-height: 90px;
+grid-column-start: 1;
+grid-column-end: 3;
+;
+}
+.image{
+border-width: 1px;
+border-style: solid;
+border-color: var(--buttonHighlight)
+}
+img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  overflow: hidden;
 }
 
-.grid-monitor > .breakout {
-    grid-column: breakout;
-}
+.full-width {
+  display: inherit;
 
-.grid-monitor > .full-width {
-    grid-column: full-width;
-  
-    display: grid;
-    grid-template-columns: inherit;
-  }
+}
+.label{
+  padding: 0.2em;
+  min-height: 0.2em;
+}
+.value{
+  padding: 0.2em;
+  min-height: 0.2em;
+}
+.start{
+  grid-column-start: 1;
+}

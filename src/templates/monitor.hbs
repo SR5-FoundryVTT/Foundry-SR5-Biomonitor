@@ -1,21 +1,50 @@
 <div class="grid-monitor">
-   <ul class="people_list" style="width: fit-content; height: fit-content;">
-    {{#each actors}}
-      <li>
-        {{this.name}}
+  <div class="header">
+    <div class="image">
+      <!--Image Header-->
+    </div>
+    <div class="label header">
+      <!-- Label Header-->
+      <h1>
+        Biomonitor
+      </h1>
+    </div>
+  </div>
+  <!--Actor Part-->
+  {{#each actors}}
+  <div class="actors-box">
+    <div class="label name start">
+      Character: 
+    </div>
+    <div class="value name">
+      {{this.name}}
+    </div>
+    <!--Acotor Image and HealthValues-->
+    <div class="image_infos">
+      <div class="image">
         <img src='{{this.image}}'>
-        Phys: {{this.physTrack.value}}
-        Stun: {{this.stunTrack.value}}
-        Status: 
-        <ul>
-        {{#each this.statuses}}
-        <li>
-            {{this}}
-        </li>
-        {{/each}}
-        </ul>
-
-      </li>
+      </div>
+      <!--<div class="label track">
+        Phys:
+      </div>-->
+      <div class="value track">
+        {{this.physTrack.value}}
+      </div>
+      <!--<div class="label track">
+        Stun:
+      </div>-->
+      <div class="value track">
+        {{this.stunTrack.value}}
+      </div>
+    </div>
+    <div class="label effects">
+      Status: 
+    </div>
+    {{#each this.statuses}}
+    <div class="value effects">
+    {{this}}
     {{/each}}
-    </ul>
+    </div>
+    {{/each}}
+  </div>
 </div>
