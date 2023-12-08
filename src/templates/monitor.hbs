@@ -1,0 +1,21 @@
+<div class="grid-monitor">
+   <ul class="people_list" style="width: fit-content; height: fit-content;">
+    {{#each actors}}
+      <li>
+        {{this.name}}
+        <img src='{{this.image}}'>
+        Phys: {{this.physTrack.value}}
+        Stun: {{this.stunTrack.value}}
+        Status: 
+        <ul>
+        {{#each this.statuses}}
+        <li>
+            {{this}}
+        </li>
+        {{/each}}
+        </ul>
+
+      </li>
+    {{/each}}
+    </ul>
+</div>
