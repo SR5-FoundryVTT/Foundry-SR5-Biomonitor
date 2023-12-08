@@ -3,18 +3,28 @@
 :root{
   --primaryBackground: rgba(0, 0, 0, 0.445);
   --buttonMain: rgb(83, 1, 1);
+  --buttonsecdry: rgb(4, 4, 170);
+  --health: rgb(231, 41, 41);
+  --stun: rgb(15, 70, 250); 
   --buttonlight: rgb(255, 171, 171);
   --buttonHighlight: rgb(207, 194, 7);
   --mainHeading: rgb(189, 189, 23);
   --systemFonts: 'Signika', 'Palatino Linotype', serif;
   --editorFonts: "klavika-medium";
+  --standardPadding: 0.25em;
+  --boxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
+  8px 0 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the right */
+
+  --topBoxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
+  8px 0 6px -6px rgba(0, 0, 0, 0.6), /* Horizontal shadow on the right */
+  0 -8px 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the top */
 }
-h1{
-padding: 1.5em;
+.label h3{
+padding: 0.5em;
 color: var(--mainHeading);
 font-family: var(--editorFonts);
-font-size:larger;
-border-color: var(--mainHeading);
+font-size:1.75em;
+border-style: none;
 }
 .window-app >section.window-content{
 color: whitesmoke;
@@ -25,69 +35,111 @@ min-height: 303px;
 }
 /*Main Grid*/
 .grid-monitor {
-  
-  --padding-inline: 4.2em;
   display: grid;
-  grid-template-columns: [header] 10em;
-    /*[full-width-start] minmax(var(--padding-inline), 1fr)
-    [breakout-start] minmax(0, var(--breakout-size))
-    [content-start] min(
-      100% - (var(--padding-inline) * 2),
-      var(--content-max-width)
-    )
-    [content-end]
-    minmax(0, var(--breakout-size)) [breakout-end]
-    minmax(var(--padding-inline), 1fr) [full-width-end];*/
-  background-color: var(--primaryBackground);
-  min-height: auto;
-}
-.header{
-position: sticky;
-z-index: 1;
-grid-column-start: 1;
-grid-column-end: 3;
-}
-.actors-box{
-padding: 0.5em;
-display: grid;
-grid-template-columns: 6em auto;
-border-width: 1px;
-border-style: solid;
-border-color: var(--buttonHighlight)
-}
-.image, img{
-border: none;
-padding: 0.2em;
-max-width: 90px;
-max-height: 90px;
-grid-column-start: 1;
-grid-column-end: 3;
-;
-}
-.image{
-border-width: 1px;
-border-style: solid;
-border-color: var(--buttonHighlight)
-}
-img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  overflow: hidden;
+  grid-template-columns: 1fr; /* Single column layout for narrow viewport */
+  grid-gap: var(--standardPadding);
+  padding: var(--standardPadding);
+  box-sizing: border-box;
+  background: var(--primaryBackground); /* Assuming a dark background for the monitor */
 }
 
-.full-width {
-  display: inherit;
+.header {
+  grid-column: 1 / -1; /* This will make the header span all the columns of the grid */
+  text-align: center; /* Center the text within the header */
+  padding: var(--standardPadding);
+  border-bottom: 2px solid #ccc; /* Example bottom border for the header */
+  /* If you have other specific styles for the header, add them here */
+}
 
+.actors-box {
+  display: grid;
+  grid-template-columns: 120px 1fr; /* Image column and status column */
+  grid-gap: var(--standardPadding);
+  align-items: start;
+  margin-bottom: 0.5em; /* Space between actor boxes */
+  box-shadow: var(--boxShadow);
+  position: relative;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
 }
-.label{
+.actors-box::before {
+  content: '';
+  position: absolute;
+  top: -1;
+  left: 0;
+  right: 0;
+  height: 1px; /* Adjust the height of the 'shadow' */
+  background-color: rgba(211, 211, 211, 0.322); /* Color of your 'shadow' */
+  box-shadow: var(--boxShadow);
+  z-index: 1; /* Ensures the shadow is above the content */
+}
+.actors-box:hover {
+  background-color: var(--buttonMain); /* Red background on hover */
+  box-shadow: 0 0 1em var(--buttonlight); /* Glowing red shadow on hover */
+}
+
+.actors-box .image_infos {
+  position: relative;
+  width: 90px; /* Set a fixed width for the image container */
+  height: 90px; /* Set a fixed height for the image container */
+  overflow: hidden; /* Prevents content from spilling outside */
+}
+.actors-box .image_infos .image img{
+  padding: 0.25em;
+  object-fit: contain;
+  overflow: hidden; /* Prevents content from spilling outside */
+}
+
+.actors-box .image_infos .image {
   padding: 0.2em;
-  min-height: 0.2em;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures the image fits within the container */
 }
-.value{
-  padding: 0.2em;
-  min-height: 0.2em;
+
+/* Overlay labels for name and health/stun values */
+.actors-box .image_infos .label.name.start,
+.actors-box .image_infos .value.name,
+.actors-box .image_infos .value.track.physik,
+.actors-box .image_infos .value.track.stun {
+  position: absolute;
+  width: calc(100% - 4px); /* Adjust width to account for padding */
+  bottom: 0; /* Position at the bottom of the image container */
+  left: 0.5em;
+  text-align: left;
+  color: white;
+  padding: var(--standardPadding)-0.1;
+  /*background-color: rgba(0, 0, 0, 0.5);*/ /* Semi-transparent background */
+  box-sizing: border-box;
 }
-.start{
-  grid-column-start: 1;
+
+/* Position .physik higher up from the bottom of the image */
+.actors-box .image_infos .value.track.physik {
+  color: var(--health) ;
+  bottom: 20px; /* Adjust as necessary, ensure it's above .stun */
+  text-shadow: 0 0 5px white;;
+}
+
+/* Keep .stun at the very bottom of the image */
+.actors-box .image_infos .value.track.stun {
+  color: var(--stun);
+  text-shadow: 0 0 5px white;
+  bottom: 0.5em;
+}
+
+/* Position the status labels and values to the right of the image */
+.actors-box .label.effects,
+.actors-box .value.effects {
+  padding: var(--standardPadding);
+  box-sizing: border-box;
+}
+
+/* Ensure that the last status box doesn't have a bottom margin to fit within the viewport */
+.actors-box:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 330px) {
+  .header, .actors-box, .actors-box .image_infos, .actors-box .label, .actors-box .value {
+    padding: var(--standardPadding)-0.1; /* Reduced padding for smaller screens */
+  }
 }

@@ -3,11 +3,11 @@
     <div class="image">
       <!--Image Header-->
     </div>
-    <div class="label header">
+    <div class="label">
       <!-- Label Header-->
-      <h1>
+      <h3>
         Biomonitor
-      </h1>
+      </h3>
     </div>
   </div>
   <!--Actor Part-->
@@ -27,24 +27,27 @@
       <!--<div class="label track">
         Phys:
       </div>-->
-      <div class="value track">
+      <div class="value track physik">
         {{this.physTrack.value}}
       </div>
       <!--<div class="label track">
         Stun:
       </div>-->
-      <div class="value track">
+      <div class="value track stun">
         {{this.stunTrack.value}}
       </div>
     </div>
+    <!--Status Section-->
     <div class="label effects">
       Status: 
     </div>
+    
     {{#each this.statuses}}
     <div class="value effects">
     {{this}}
     {{/each}}
     </div>
+    
     {{/each}}
   </div>
 </div>
