@@ -19,6 +19,7 @@
   8px 0 6px -6px rgba(0, 0, 0, 0.6), /* Horizontal shadow on the right */
   0 -8px 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the top */
 }
+
 .label h3{
 padding: 0.5em;
 color: var(--mainHeading);
@@ -26,13 +27,15 @@ font-family: var(--editorFonts);
 font-size:1.75em;
 border-style: none;
 }
-.window-app >section.window-content #biomonitor{
+
+.window-app > section.window-content #biomonitor{
 color: whitesmoke;
 background: none;
 background-image: none;
 width: 330px;
 min-height: 303px;
 }
+
 /*Main Grid*/
 .grid-monitor {
   display: grid;
@@ -61,6 +64,7 @@ min-height: 303px;
   position: relative;
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
 }
+
 .actors-box::before {
   content: '';
   position: absolute;
@@ -72,6 +76,7 @@ min-height: 303px;
   box-shadow: var(--boxShadow);
   z-index: 1; /* Ensures the shadow is above the content */
 }
+
 .actors-box:hover {
   background-color: var(--buttonMain); /* Red background on hover */
   box-shadow: 0 0 1em var(--buttonlight); /* Glowing red shadow on hover */
@@ -83,6 +88,7 @@ min-height: 303px;
   height: 90px; /* Set a fixed height for the image container */
   overflow: hidden; /* Prevents content from spilling outside */
 }
+
 .actors-box .image_infos .image img{
   padding: 0.25em;
   object-fit: contain;
