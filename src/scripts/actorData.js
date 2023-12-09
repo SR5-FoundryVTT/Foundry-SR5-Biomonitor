@@ -2,15 +2,15 @@
 export default class ActorData{
 
     static getPhysicalTrack(actor) {
-        return actor?.system.tracks.physical
+        return actor?.system.track?.physical
     }
 
     static getStunTrack(actor) {
-        return actor?.system.tracks.stun
+        return actor?.system.track?.stun
     }
 
     static getStatus(actor) {
-        return actor?.status
+        return actor?.statuses ?? []
     }
 
     static getImage(actor) {
