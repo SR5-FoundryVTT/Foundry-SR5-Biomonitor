@@ -1,3 +1,19 @@
 {
+    "BioMon": "Bio Monitor",
+
+    "Settings": {
+        "ActorTypes": {
+            "trackCharacters": "Track characters?",
+            "trackCritters": "Track critter?",
+            "trackVehicles": "Track vehicles?"
+        },
+        "TrackedActors": {
+            "trackedActors": "Which actors can be tracked?",
+            "playerActors": "Player owned actors",
+            "actorsWithItem": "Actors with a specific item",
+            "userActors": "Actors which are selected in user config"
+        }
+       
+    }
 
 }

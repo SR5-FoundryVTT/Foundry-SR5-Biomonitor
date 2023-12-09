@@ -14,11 +14,11 @@
     --padding-inline: 1rem;
     --content-max-width: 900px;
     --breakout-max-width: 1200px;
-  
+
     --breakout-size: calc(
       (var(--breakout-max-width) - var(--content-max-width)) / 2
     );
-  
+
     display: grid;
     grid-template-columns:
       [full-width-start] minmax(var(--padding-inline), 1fr)
@@ -43,7 +43,7 @@
 
 .grid-monitor > .full-width {
     grid-column: full-width;
-  
+
     display: grid;
     grid-template-columns: inherit;
   }

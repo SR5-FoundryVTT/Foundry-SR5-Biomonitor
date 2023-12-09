@@ -1,0 +1,53 @@
+<div class="grid-monitor">
+  <div class="header">
+    <div class="image">
+      <!--Image Header-->
+    </div>
+    <div class="label">
+      <!-- Label Header-->
+      <h3>
+        Biomonitor
+      </h3>
+    </div>
+  </div>
+  <!--Actor Part-->
+  {{#each actors}}
+  <div class="actors-box">
+    <div class="label name start">
+      Character: 
+    </div>
+    <div class="value name">
+      {{this.name}}
+    </div>
+    <!--Acotor Image and HealthValues-->
+    <div class="image_infos">
+      <div class="image">
+        <img src='{{this.image}}'>
+      </div>
+      <!--<div class="label track">
+        Phys:
+      </div>-->
+      <div class="value track physik">
+        {{this.physTrack.value}}
+      </div>
+      <!--<div class="label track">
+        Stun:
+      </div>-->
+      <div class="value track stun">
+        {{this.stunTrack.value}}
+      </div>
+    </div>
+    <!--Status Section-->
+    <div class="label effects">
+      Status: 
+    </div>
+    
+    {{#each this.statuses}}
+    <div class="value effects">
+    {{this}}
+    {{/each}}
+    </div>
+    
+    {{/each}}
+  </div>
+</div>
