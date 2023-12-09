@@ -19,7 +19,7 @@
   font-size:larger;
   border-color: var(--mainHeading);
   }
-  .window-app >section.window-content{
+  .window-app > section.window-content #biomonitor {
   color: whitesmoke;
   background: none;
   background-image: none;

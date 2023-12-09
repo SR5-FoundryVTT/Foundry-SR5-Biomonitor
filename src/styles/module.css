@@ -26,7 +26,7 @@ font-family: var(--editorFonts);
 font-size:1.75em;
 border-style: none;
 }
-.window-app >section.window-content{
+.window-app >section.window-content #biomonitor{
 color: whitesmoke;
 background: none;
 background-image: none;
@@ -142,4 +142,12 @@ min-height: 303px;
   .header, .actors-box, .actors-box .image_infos, .actors-box .label, .actors-box .value {
     padding: var(--standardPadding)-0.1; /* Reduced padding for smaller screens */
   }
+}
+.label{
+  padding: 0.2em;
+  min-height: 0.2em;
+}
+.value{
+  padding: 0.2em;
+  min-height: 0.2em;
 }
