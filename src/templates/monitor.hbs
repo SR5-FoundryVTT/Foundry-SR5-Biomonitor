@@ -42,9 +42,10 @@
       Status: 
     </div>
     
-    {{#each this.statuses}}
     <div class="value effects">
-    {{this}}
+      {{#each this.statuses}}
+        {{localize this.name }}
+        <img src='{{this.img}}'>
     {{/each}}
     </div>
     

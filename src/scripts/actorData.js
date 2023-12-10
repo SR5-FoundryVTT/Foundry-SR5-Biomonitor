@@ -10,7 +10,17 @@ export default class ActorData{
     }
 
     static getStatus(actor) {
-        return actor?.statuses ?? []
+        let statusIds = actor?.statuses ?? []
+        
+        let status = [];
+        statusIds.forEach(search => {
+            let statusEffect = CONFIG.statusEffects.filter(effect => effect.id == search)[0]
+            status.push({
+                name: statusEffect.name,
+                img: statusEffect.icon
+            })
+        });
+        return status;
     }
 
     static getImage(actor) {

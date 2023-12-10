@@ -20,7 +20,7 @@ export default class GetActors{
 
       switch(game.settings.get('sr5-biomonitor', 'trackedActors')) {
         case 'player' : return this.filterPlayerActors(actors)
-        case 'item' : return this.filterActorsWithItem()
+        case 'item' : return this.filterActorsWithItem(actors)
         case 'user' : return this.filterUserActors(actors)
         default: return actors;
       }
@@ -35,8 +35,12 @@ export default class GetActors{
         return actors.filter(actor => actor.hasPlayerOwner)
     }
 
-    static filterActorsWithItem(actors, items) {
-        return actors.filter(actor => true)
+    static filterActorsWithItem(actors) {
+        let items = [];
+        game.settings.get('sr5-biomonitor', 'necessaryItem').split(',').forEach(item => {
+          items.push(item.trim())
+        })
+        return actors.filter(actor => actor.items.filter(item => items.includes(item.name)).length > 0)
     }
 
     static filterUserActors(actors) {

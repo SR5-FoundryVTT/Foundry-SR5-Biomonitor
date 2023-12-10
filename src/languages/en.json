@@ -12,6 +12,9 @@
             "playerActors": "Player owned actors",
             "actorsWithItem": "Actors with a specific item",
             "userActors": "Actors which are selected in user config"
+        },
+        "NecessaryItem": {
+            "necessaryItem": "Which item is required to be tracked?"
         }
        
     }
