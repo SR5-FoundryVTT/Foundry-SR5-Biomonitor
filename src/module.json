@@ -50,5 +50,8 @@
       "path": "languages/en.json",
       "flags": {}
     }
-  ]
+  ],
+  "url": "URL",
+  "manifest": "MANIFEST",
+  "download": "DOWNLOAD"
 }
