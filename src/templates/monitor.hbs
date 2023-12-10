@@ -1,10 +1,10 @@
 <div class="grid-monitor">
-  <div class="header">
+  <div class="sr5-biomon-header">
     <div class="image">
-      <!--Image Header-->
+      <!--Image sr5-biomon-header-->
     </div>
-    <div class="label">
-      <!-- Label Header-->
+    <div class="sr5-biomon-label">
+      <!-- sr5-biomon-label sr5-biomon-header-->
       <h3>
         Biomonitor
       </h3>
@@ -13,39 +13,38 @@
   <!--Actor Part-->
   {{#each actors}}
   <div class="actors-box">
-    <div class="label name start">
+    <div class="sr5-biomon-sr5-biomon-label sr5-biomon-name start">
       Character: 
     </div>
-    <div class="value name">
-      {{this.name}}
+    <div class="sr5-biomon-value sr5-biomon-name">
+      {{this.sr5-biomon-name}}
     </div>
-    <!--Acotor Image and HealthValues-->
+    <!--Acotor Image and Healthsr5-biomon-values-->
     <div class="image_infos">
-      <div class="image">
+      <div class="sr5-biomon-image">
         <img src='{{this.image}}'>
       </div>
-      <!--<div class="label track">
+      <!--<div class="sr5-biomon-label track">
         Phys:
       </div>-->
-      <div class="value track physik">
-        {{this.physTrack.value}}
+      <div class="sr5-biomon-value sr5-biomon-track sr5-biomon-physik">
+        {{this.physTrack.sr5-biomon-value}}
       </div>
-      <!--<div class="label track">
+      <!--<div class="sr5-biomon-label track">
         Stun:
       </div>-->
-      <div class="value track stun">
-        {{this.stunTrack.value}}
+      <div class="sr5-biomon-value sr5-biomon-track sr5-biomon-stun">
+        {{this.stunTrack.sr5-biomon-value}}
       </div>
     </div>
     <!--Status Section-->
-    <div class="label effects">
+    <div class="sr5-biomon-label sr5-biomon-effects">
       Status: 
     </div>
     
-    <div class="value effects">
-      {{#each this.statuses}}
-        {{localize this.name }}
-        <img src='{{this.img}}'>
+    {{#each this.statuses}}
+    <div class="sr5-biomon-value effects">
+    {{this}}
     {{/each}}
     </div>
     

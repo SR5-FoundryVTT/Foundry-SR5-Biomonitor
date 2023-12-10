@@ -17,7 +17,7 @@ export default class BioMon extends Application {
           popOut: true,
           resizable: true,
           dragDrop: [{dragSelector: null, dropSelector: null}],
-          classes: ["sr5_biomonitor"]
+          classes: ["sr5-biomonitor"]
         }
       }
 
