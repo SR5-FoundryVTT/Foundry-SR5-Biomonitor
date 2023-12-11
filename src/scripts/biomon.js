@@ -4,7 +4,6 @@ import ActorData from './actorData.js'
 export default class BioMon extends Application {
     constructor() {
         super();
-        this.hooks = [];
         this.setHooks();
     }
 
@@ -24,7 +23,27 @@ export default class BioMon extends Application {
       }
 
     setHooks() {
-        
+        this.hooks = [
+            {
+                hook: "updateActor",
+                fn: this.updateBiomon.bind(this),
+            },
+            {
+                hook: "deleteActiveEffect",
+                fn: this.updateBiomon.bind(this),
+            },
+            {
+                hook: "createActiveEffect",
+                fn: this.updateBiomon.bind(this),
+            },
+        ];
+        for (let hook of this.hooks) {
+            hook.id = Hooks.on(hook.hook, hook.fn);
+        }
+    }
+
+    updateBiomon() {
+        this.render()
     }
 
     removeHooks() {
@@ -40,6 +59,7 @@ export default class BioMon extends Application {
         actors.forEach(actor => {
             bioMonData.push({
                 name: actor.name,
+                id: actor.uuid,
                 image: ActorData.getImage(actor),
                 physTrack: ActorData.getPhysicalTrack(actor),
                 stunTrack: ActorData.getStunTrack(actor),
@@ -49,10 +69,6 @@ export default class BioMon extends Application {
 
         return { actors: bioMonData };
     }
-
-    activateListeners(html) {
-        
-      }
 
     async close(...args) {
         this.removeHooks();
