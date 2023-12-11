@@ -12,9 +12,11 @@ export default class BioMon extends Application {
         return {
           ...super.defaultOptions,
           id: "biomonitor",
-          title: "Bio Monitor",
+          title: "Biomonitor",
           template: "modules/sr5-biomonitor/templates/monitor.hbs",
           popOut: true,
+          top: 500,
+          left: 15,
           resizable: true,
           dragDrop: [{dragSelector: null, dropSelector: null}],
           classes: ["sr5-biomonitor"]
