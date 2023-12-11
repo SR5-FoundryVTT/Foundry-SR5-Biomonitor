@@ -1,49 +1,157 @@
-
 /* Varibles*/
 :root{
-    --primaryBackground: rgba(0, 0, 0, 0.445);
-    --buttonMain: rgb(83, 1, 1);
-    --buttonlight: rgb(255, 171, 171);
-    --buttonHighlight: rgb(207, 194, 7);
-    --mainHeading: rgb(189, 189, 23);
-    --systemFonts: 'Signika', 'Palatino Linotype', serif;
-    --editorFonts: "klavika-medium";
+  --primaryBackground: rgba(0, 0, 0, 0.445);
+  --buttonMain: rgb(83, 1, 1);
+  --buttonsecdry: rgb(4, 4, 170);
+  --health: rgb(231, 41, 41);
+  --stun: rgb(15, 70, 250); 
+  --buttonlight: rgb(255, 171, 171);
+  --buttonHighlight: rgb(207, 194, 7);
+  --mainHeading: rgb(189, 189, 23);
+  --systemFonts: 'Signika', 'Palatino Linotype', serif;
+  --editorFonts: "klavika-medium";
+  --standardPadding: 0.25em;
+  --boxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
+  8px 0 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the right */
+
+  --topBoxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
+  8px 0 6px -6px rgba(0, 0, 0, 0.6), /* Horizontal shadow on the right */
+  0 -8px 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the top */
+}
+.label h3{
+padding: 0.5em;
+color: var(--mainHeading);
+font-family: var(--editorFonts);
+font-size:1.75em;
+border-style: none;
+}
+
+.sr5-biomonitor >section.window-content{
+color: whitesmoke;
+background: none;
+background-image: none;
+/*
+width: 330px;
+min-height: 303px; */
 }
 /*Main Grid*/
 .grid-monitor {
-    --padding-inline: 1rem;
-    --content-max-width: 900px;
-    --breakout-max-width: 1200px;
-
-    --breakout-size: calc(
-      (var(--breakout-max-width) - var(--content-max-width)) / 2
-    );
-
-    display: grid;
-    grid-template-columns:
-      [full-width-start] minmax(var(--padding-inline), 1fr)
-      [breakout-start] minmax(0, var(--breakout-size))
-      [content-start] min(
-        100% - (var(--padding-inline) * 2),
-        var(--content-max-width)
-      )
-      [content-end]
-      minmax(0, var(--breakout-size)) [breakout-end]
-      minmax(var(--padding-inline), 1fr) [full-width-end];
-  }
-
-.grid-monitor > :not(.breakout, .full-width),
-.full-width > :not(.breakout, full-width) {
-    grid-column: content;
+  display: grid;
+  grid-template-columns: 1fr; /* Single column layout for narrow viewport */
+  grid-gap: var(--standardPadding);
+  padding: var(--standardPadding);
+  box-sizing: border-box;
+  background: var(--primaryBackground); /* Assuming a dark background for the monitor */
 }
 
-.grid-monitor > .breakout {
-    grid-column: breakout;
+.sr5-biomon-header {
+  grid-column: 1 / -1; /* This will make the header span all the columns of the grid */
+  text-align: center; /* Center the text within the header */
+  padding: var(--standardPadding);
+  border-bottom: 2px solid #ccc; /* Example bottom border for the header */
+  /* If you have other specific styles for the header, add them here */
 }
 
-.grid-monitor > .full-width {
-    grid-column: full-width;
+.sr5-biomon-actors-box {
+  display: grid;
+  grid-template-columns: 120px 1fr; /* Image column and status column */
+  grid-gap: var(--standardPadding);
+  align-items: start;
+  margin-bottom: 0.5em; /* Space between actor boxes */
+  box-shadow: var(--boxShadow);
+  position: relative;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+.sr5-biomon-actors-box::before {
+  content: '';
+  position: absolute;
+  top: -1;
+  left: 0;
+  right: 0;
+  height: 1px; /* Adjust the height of the 'shadow' */
+  background-color: rgba(211, 211, 211, 0.322); /* Color of your 'shadow' */
+  box-shadow: var(--boxShadow);
+  z-index: 1; /* Ensures the shadow is above the content */
+}
+.sr5-biomon-actors-box:hover {
+  background-color: var(--buttonMain); /* Red background on hover */
+  box-shadow: 0 0 1em var(--buttonlight); /* Glowing red shadow on hover */
+}
 
-    display: grid;
-    grid-template-columns: inherit;
+.sr5-biomon-actors-box .image_infos {
+  position: relative;
+  width: 90px; /* Set a fixed width for the image container */
+  height: 90px; /* Set a fixed height for the image container */
+  overflow: hidden; /* Prevents content from spilling outside */
+}
+.sr5-biomon-actors-box .image_infos .sr5-biomon-image {
+  padding: 0.25em;
+  object-fit: contain;
+  overflow: hidden; /* Prevents content from spilling outside */
+  & img{
+    padding: 0.2em;
   }
+}
+
+.sr5-biomon-actors-box .image_infos .sr5-biomon-image {
+  padding: 0.2em;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures the image fits within the container */
+}
+
+/* Overlay labels for name and health/stun values */
+.sr5-biomon-actors-box .image_infos .sr5-biomon-label.sr5-biomon-name.sr5-biomon-start,
+.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-name,
+.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-track.sr5-biomon-physik,
+.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-track.sr5-biomon-stun {
+  position: absolute;
+  width: calc(100% - 4px); /* Adjust width to account for padding */
+  bottom: 0; /* Position at the bottom of the image container */
+  left: 0.5em;
+  text-align: left;
+  color: white;
+  padding: var(--standardPadding)-0.1;
+  /*background-color: rgba(0, 0, 0, 0.5);*/ /* Semi-transparent background */
+  box-sizing: border-box;
+}
+
+/* Position .physik higher up from the bottom of the image */
+.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-track.sr5-biomon-physik {
+  color: var(--health) ;
+  bottom: 20px; /* Adjust as necessary, ensure it's above .stun */
+  text-shadow: 0 0 5px white;;
+}
+
+/* Keep .stun at the very bottom of the image */
+.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-track.sr5-biomon-stun {
+  color: var(--stun);
+  text-shadow: 0 0 5px white;
+  bottom: 0.5em;
+}
+
+/* Position the status labels and values to the right of the image */
+.sr5-biomon-actors-box .sr5-biomon-label.sr5-biomon-effects,
+.sr5-biomon-actors-box .sr5-biomon-value.sr5-biomon-effects {
+  padding: var(--standardPadding);
+  box-sizing: border-box;
+}
+
+/* Ensure that the last status box doesn't have a bottom margin to fit within the viewport */
+.sr5-biomon-actors-box:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 330px) {
+  .sr5-biomon-header, .sr5-biomon-actors-box, .sr5-biomon-actors-box .image_infos, .actors-box .sr5-biomon-label, .actors-box .sr5-biomon-value {
+    padding: var(--standardPadding)-0.1; /* Reduced padding for smaller screens */
+  }
+}
+.sr5-biomon-label{
+  padding: 0.2em;
+  min-height: 0.2em;
+}
+.sr5-biomon-value{
+  padding: 0.2em;
+  min-height: 0.2em;
+}
