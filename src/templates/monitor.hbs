@@ -11,16 +11,20 @@
     </div>
   </div>
   <!--Actor Part-->
+  <div class="sr5-biomon-header-box">
+    <div class="sr5-biomon-label sr5-biomon-top">Character</div>
+    <div class="sr5-biomon-label sr5-biomon-top">Statuses</div>
+  </div>
   {{#each actors}}
-  <div class="actors-box">
-    <div class="sr5-biomon-sr5-biomon-label sr5-biomon-name start">
+  <div class="sr5-biomon-actors-box">
+    <!--<div class="sr5-biomon-sr5-biomon-label sr5-biomon-name sr5-biomon-start">
       Character: 
-    </div>
-    <div class="sr5-biomon-value sr5-biomon-name">
-      {{this.sr5-biomon-name}}
-    </div>
-    <!--Acotor Image and Healthsr5-biomon-values-->
+    </div>-->
+    <!--Acotor Image and Health values-->
     <div class="image_infos">
+      <div class="sr5-biomon-value sr5-biomon-name">
+        {{this.name}}
+      </div>
       <div class="sr5-biomon-image">
         <img src='{{this.image}}'>
       </div>
@@ -28,26 +32,27 @@
         Phys:
       </div>-->
       <div class="sr5-biomon-value sr5-biomon-track sr5-biomon-physik">
-        {{this.physTrack.sr5-biomon-value}}
+        {{this.physTrack.value}}
       </div>
       <!--<div class="sr5-biomon-label track">
         Stun:
       </div>-->
       <div class="sr5-biomon-value sr5-biomon-track sr5-biomon-stun">
-        {{this.stunTrack.sr5-biomon-value}}
+        {{this.stunTrack.value}}
       </div>
     </div>
     <!--Status Section-->
-    <div class="sr5-biomon-label sr5-biomon-effects">
+    <div class="sr5-biomon-label">
       Status: 
     </div>
     
     {{#each this.statuses}}
-    <div class="sr5-biomon-value effects">
-    {{this}}
-    {{/each}}
+    <div class="sr5-biomon-value sr5-biomon-effects">
+      {{localize this.name }}
+      <img src='{{this.img}}'>
+      {{/each}}
     </div>
-    
+  <!--End Actor Section-->
     {{/each}}
   </div>
 </div>

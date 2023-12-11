@@ -18,14 +18,21 @@
   8px 0 6px -6px rgba(0, 0, 0, 0.6), /* Horizontal shadow on the right */
   0 -8px 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the top */
 }
-.label h3{
+.sr5-biomon-label {
 padding: 0.5em;
-color: var(--mainHeading);
 font-family: var(--editorFonts);
-font-size:1.75em;
 border-style: none;
+ & h3 {
+    font-size:1.75em;
+    color: var(--mainHeading)
+  }
 }
-
+.sr5-biomonitor > header {
+  
+  & h4.window-title{
+    font-size: 0
+  }
+}
 .sr5-biomonitor >section.window-content{
 color: whitesmoke;
 background: none;
@@ -48,13 +55,12 @@ min-height: 303px; */
   grid-column: 1 / -1; /* This will make the header span all the columns of the grid */
   text-align: center; /* Center the text within the header */
   padding: var(--standardPadding);
-  border-bottom: 2px solid #ccc; /* Example bottom border for the header */
+  border-bottom: 2px solid var(--mainHeading); /* Example bottom border for the header */
   /* If you have other specific styles for the header, add them here */
 }
-
 .sr5-biomon-actors-box {
   display: grid;
-  grid-template-columns: 120px 1fr; /* Image column and status column */
+  grid-template-columns: 1fr 1fr; /* Image column and status column */
   grid-gap: var(--standardPadding);
   align-items: start;
   margin-bottom: 0.5em; /* Space between actor boxes */
@@ -78,7 +84,13 @@ min-height: 303px; */
   box-shadow: 0 0 1em var(--buttonlight); /* Glowing red shadow on hover */
 }
 
+.sr5-biomon-header-box{
+  display: inline-grid;
+  grid-template-columns: auto auto;
+}
+
 .sr5-biomon-actors-box .image_infos {
+  grid-row: 2;
   position: relative;
   width: 90px; /* Set a fixed width for the image container */
   height: 90px; /* Set a fixed height for the image container */
@@ -101,10 +113,10 @@ min-height: 303px; */
 }
 
 /* Overlay labels for name and health/stun values */
-.sr5-biomon-actors-box .image_infos .sr5-biomon-label.sr5-biomon-name.sr5-biomon-start,
-.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-name,
-.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-track.sr5-biomon-physik,
-.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-track.sr5-biomon-stun {
+.sr5-biomon-label.sr5-biomon-name,
+.sr5-biomon-value,
+.sr5-biomon-value.sr5-biomon-track.sr5-biomon-physik,
+.sr5-biomon-value.sr5-biomon-track.sr5-biomon-stun {
   position: absolute;
   width: calc(100% - 4px); /* Adjust width to account for padding */
   bottom: 0; /* Position at the bottom of the image container */
@@ -148,10 +160,23 @@ min-height: 303px; */
   }
 }
 .sr5-biomon-label{
+  grid-row: 2;
   padding: 0.2em;
   min-height: 0.2em;
+  & h3{
+    border: none;
+  }
 }
 .sr5-biomon-value{
   padding: 0.2em;
   min-height: 0.2em;
+}
+.image_infos .sr5-biomon-image{
+  z-index: 0;
+}
+.sr5-biomon-value.sr5-biomon-name{
+  bottom: 60px;
+  position: absolute;
+  z-index: 1;
+  color: bisque;
 }
