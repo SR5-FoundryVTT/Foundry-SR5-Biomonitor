@@ -17,10 +17,7 @@
   </div>
   {{#each actors}}
     <div class="sr5-biomon-actors-box" actor-uuid="{{this.id}}">
-      <!--<div class="sr5-biomon-sr5-biomon-label sr5-biomon-name sr5-biomon-start">
-        Character: 
-      </div>-->
-      <!--Acotor Image and Health values-->
+      <!--Acotor Image-->
       <div class="image_infos">
         <div class="sr5-biomon-value sr5-biomon-name">
           {{this.name}}
@@ -28,27 +25,25 @@
         <div class="sr5-biomon-image">
           <img src='{{this.image}}'>
         </div>
-        <!--<div class="sr5-biomon-label track">
-          Phys:
-        </div>-->
-        {{#for 1 (sum this.physTrack.max 1)}}
-          <div class="sr5-biomon-value sr5-biomon-track sr5-biomon-physik">
-              {{this}}  <!-- Hier dieZCelle einfügen -->
-          </div>
-        {{/for}}
-        
-        <!--<div class="sr5-biomon-label track">
-          Stun:
-        </div>-->
-        <div class="sr5-biomon-value sr5-biomon-track sr5-biomon-stun">
+      </div>
+      <!--Physikal Boxes-->
+      <div class="sr5-biomon-track-container">
+        {{#for 1 this.physTrack.value}}
+        <div class="sr5-biomon-physik-filled sr5-biomon-track">
+        </div>
+          {{/for}}
+          {{#for 1 this.physTrack.max-value}}
+        <div class="sr5-biomon-physik sr5-biomon-track">
+        </div>
+          {{/for}}
+        <!--Stun Boxes-->
+          {{#for 1 (sum this.stunTrack.max 1)}}
+        <div class="sr5-biomon-stun sr5-biomon-track" title='{{this.stunTrack.value}}'>
           {{this.stunTrack.value}}
         </div>
+          {{/for}}
       </div>
-      <!--Status Section sr5-biomon-label can be removed once statuses have be sorted-->
-      <!--<div class="sr5-biomon-label">
-        Status: 
-      </div>-->
-      
+      <!--Status Section sr5-biomon-label can be removed once statuses have be sorted-->     
       <div class="sr5-biomon-effects">
         {{#each this.statuses}}
         <div class="sr5-biomon-image-view">
