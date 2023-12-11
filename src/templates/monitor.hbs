@@ -16,7 +16,7 @@
     <div class="sr5-biomon-label sr5-biomon-top">Statuses</div>
   </div>
   {{#each actors}}
-    <div class="sr5-biomon-actors-box">
+    <div class="sr5-biomon-actors-box" actor-uuid="{{this.id}}">
       <!--<div class="sr5-biomon-sr5-biomon-label sr5-biomon-name sr5-biomon-start">
         Character: 
       </div>-->
@@ -49,7 +49,7 @@
       <div class="sr5-biomon-effects">
         {{#each this.statuses}}
         <div class="sr5-biomon-image-view">
-          <img src='{{this.img}}' title='{{this.name}}'>
+          <img src='{{this.img}}' title='{{localize this.name}}'>
         </div>
         {{/each}}
       </div>

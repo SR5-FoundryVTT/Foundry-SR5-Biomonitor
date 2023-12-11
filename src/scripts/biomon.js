@@ -59,6 +59,7 @@ export default class BioMon extends Application {
         actors.forEach(actor => {
             bioMonData.push({
                 name: actor.name,
+                id: actor.uuid,
                 image: ActorData.getImage(actor),
                 physTrack: ActorData.getPhysicalTrack(actor),
                 stunTrack: ActorData.getStunTrack(actor),

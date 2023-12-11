@@ -29,3 +29,11 @@ import Settings from "./settings.js"
 
       });
  });
+
+ Hooks.on('renderApplication', async function(actor, html) {
+
+   html.find('.sr5-biomon-actors-box').on('click', async ev => {
+      (await fromUuid(ev.currentTarget.attributes['actor-uuid'].value)).sheet?.render(true)
+   })
+
+});
