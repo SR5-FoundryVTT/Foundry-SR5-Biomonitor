@@ -24,8 +24,11 @@ font-family: var(--editorFonts);
 border-style: none;
  & h3 {
     font-size:1.75em;
-    color: var(--mainHeading)
+    color: var(--buttonHighlight)
   }
+}
+.sr5-biomon-label.sr5-biomon-top{
+  color: var(--buttonHighlight);
 }
 .sr5-biomonitor > header {
   
@@ -144,9 +147,24 @@ min-height: 303px; */
 
 /* Position the status labels and values to the right of the image */
 .sr5-biomon-actors-box .sr5-biomon-label.sr5-biomon-effects,
-.sr5-biomon-actors-box .sr5-biomon-value.sr5-biomon-effects {
+.sr5-biomon-actors-box .sr5-biomon-effects {
   padding: var(--standardPadding);
   box-sizing: border-box;
+  grid-row: 2;
+}
+
+.sr5-biomon-effects{
+  display: inline-grid;
+  grid-template-columns: 2em 2em;
+  grid-auto-rows: auto;
+  gap: 1.1em;
+  justify-items: start;
+}
+
+.sr5-biomon-image-view{
+  display: block;
+  border: 1px;
+  border-radius: 2em;
 }
 
 /* Ensure that the last status box doesn't have a bottom margin to fit within the viewport */
