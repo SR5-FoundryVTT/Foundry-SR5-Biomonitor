@@ -10,6 +10,8 @@
   --mainHeading: rgb(189, 189, 23);
   --systemFonts: 'Signika', 'Palatino Linotype', serif;
   --editorFonts: "klavika-medium";
+  --emptyBoxBorder: rgba(255, 255, 212, 0.466);
+  --emptyBox: #f5f5dc59;
   --standardPadding: 0.25em;
   --boxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
   8px 0 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the right */
@@ -17,19 +19,9 @@
   --topBoxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
   8px 0 6px -6px rgba(0, 0, 0, 0.6), /* Horizontal shadow on the right */
   0 -8px 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the top */
+  --headerImage: url('../assets/biomon-header.webp') no-repeat center center;
 }
-.sr5-biomon-label {
-padding: 0.5em;
-font-family: var(--editorFonts);
-border-style: none;
- & h3 {
-    font-size:1.75em;
-    color: var(--buttonHighlight)
-  }
-}
-.sr5-biomon-label.sr5-biomon-top{
-  color: var(--buttonHighlight);
-}
+/*Main Window Core Foundry*/
 .sr5-biomonitor > header {
   
   & h4.window-title{
@@ -37,12 +29,39 @@ border-style: none;
   }
 }
 .sr5-biomonitor >section.window-content{
-color: whitesmoke;
-background: none;
-background-image: none;
-/*
-width: 330px;
-min-height: 303px; */
+  color: whitesmoke;
+  background: none;
+  }
+/*Header Label*/
+.sr5-biomon-label-headerText{
+  font-size:1.75em;
+  font-family: var(--systemFonts);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*Main Label*/
+.sr5-biomon-label {
+  z-index: 1;
+padding: 0.5em;
+font-family: var(--editorFonts);
+border-style: none;
+}
+.sr5-biomon-label.sr5-biomon-top{
+  color: var(--buttonHighlight);
+}
+/*Header Image*/
+.sr5-biomon-image-head{
+  background: var(--headerImage);
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: auto;
+  width: auto;
 }
 /*Main Grid*/
 .grid-monitor {
@@ -53,14 +72,17 @@ min-height: 303px; */
   box-sizing: border-box;
   background: var(--primaryBackground); /* Assuming a dark background for the monitor */
 }
-
+/*Header Content Grid Setup*/
 .sr5-biomon-header {
+  display: grid;
+  position: relative;
   grid-column: 1 / -1; /* This will make the header span all the columns of the grid */
   text-align: center; /* Center the text within the header */
   padding: var(--standardPadding);
   border-bottom: 2px solid var(--mainHeading); /* Example bottom border for the header */
   /* If you have other specific styles for the header, add them here */
 }
+/*Actor Styling*/
 .sr5-biomon-actors-box {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Image column and status column */
@@ -82,11 +104,12 @@ min-height: 303px; */
   box-shadow: var(--boxShadow);
   z-index: 1; /* Ensures the shadow is above the content */
 }
+/*Hover Effect on the Actor*/
 .sr5-biomon-actors-box:hover {
   background-color: var(--buttonMain); /* Red background on hover */
   box-shadow: 0 0 1em var(--buttonlight); /* Glowing red shadow on hover */
 }
-
+/*Actor Header*/
 .sr5-biomon-header-box{
   display: inline-grid;
   grid-template-columns: auto auto;
@@ -105,6 +128,8 @@ min-height: 303px; */
   overflow: hidden; /* Prevents content from spilling outside */
   & img{
     padding: 0.2em;
+    border: none;
+    border-radius: 0.4em;
   }
 }
 
@@ -114,35 +139,66 @@ min-height: 303px; */
   height: 100%;
   object-fit: contain; /* Ensures the image fits within the container */
 }
-
-/* Overlay labels for name and health/stun values */
-.sr5-biomon-label.sr5-biomon-name,
-.sr5-biomon-value,
-.sr5-biomon-value.sr5-biomon-track.sr5-biomon-physik,
-.sr5-biomon-value.sr5-biomon-track.sr5-biomon-stun {
-  position: absolute;
-  width: calc(100% - 4px); /* Adjust width to account for padding */
-  bottom: 0; /* Position at the bottom of the image container */
-  left: 0.5em;
-  text-align: left;
-  color: white;
-  padding: var(--standardPadding)-0.1;
-  /*background-color: rgba(0, 0, 0, 0.5);*/ /* Semi-transparent background */
-  box-sizing: border-box;
+/*Health Container for Health and Stun*/
+.sr5-biomon-track-container {
+  grid-row: 3; /* Position in the column, below the image */
+  display: grid;
+  grid-template-rows: auto auto; /* Two rows, each fitting its content */
+  grid-row-gap: 5px; /* Space between rows */
+  margin-top: 5px; /* Space between the image and the track boxes */
 }
 
-/* Position .physik higher up from the bottom of the image */
-.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-track.sr5-biomon-physik {
-  color: var(--health) ;
-  bottom: 20px; /* Adjust as necessary, ensure it's above .stun */
-  text-shadow: 0 0 5px white;;
+/* Container for Physik boxes */
+.sr5-biomon-physik {
+  grid-row: 1; /* Physik boxes in the first row */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
 }
 
-/* Keep .stun at the very bottom of the image */
-.sr5-biomon-actors-box .image_infos .sr5-biomon-value.sr5-biomon-track.sr5-biomon-stun {
-  color: var(--stun);
-  text-shadow: 0 0 5px white;
-  bottom: 0.5em;
+/* Container for Stun boxes */
+.sr5-biomon-stun {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
+}
+
+/* Styles for filled and empty Physik boxes */
+.sr5-biomon-physik-filled,
+.sr5-biomon-physik {
+  grid-auto-columns: auto;
+  grid-row: 1;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.2em;
+}
+
+.sr5-biomon-physik-filled {
+  background-color: var(--health); /* Red for filled Physik */
+}
+
+.sr5-biomon-physik {
+  border: 1px solid var(--emptyBoxBorder); /* Yellow border for empty Physik */
+  background: var(--emptyBox);
+}
+
+/* Styles for filled and empty Stun boxes */
+.sr5-biomon-stun-filled,
+.sr5-biomon-stun {
+  grid-auto-columns: auto;
+  grid-row: 2;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.sr5-biomon-stun-filled {
+  background-color: var(--stun); /* Blue for filled Stun */
+}
+
+.sr5-biomon-stun {
+  border: 1px solid var(--emptyBoxBorder); /* Yellow border for empty Stun */
+  background: var(--emptyBox);
 }
 
 /* Position the status labels and values to the right of the image */
@@ -150,7 +206,7 @@ min-height: 303px; */
 .sr5-biomon-actors-box .sr5-biomon-effects {
   padding: var(--standardPadding);
   box-sizing: border-box;
-  grid-row: 2;
+  grid-row: 2 / 3;
 }
 
 .sr5-biomon-effects{
@@ -193,7 +249,7 @@ min-height: 303px; */
   z-index: 0;
 }
 .sr5-biomon-value.sr5-biomon-name{
-  bottom: 60px;
+  bottom: 70px;
   position: absolute;
   z-index: 1;
   color: bisque;

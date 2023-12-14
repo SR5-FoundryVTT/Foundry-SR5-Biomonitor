@@ -1,5 +1,8 @@
 import BioMon from "./biomon.js"
 import Settings from "./settings.js"
+import { registerBasicHelpers } from "./handlebarHelpers.js  ";
+
+registerBasicHelpers();
 
   Hooks.on("ready", () => {
     Settings.addAllSettings();
