@@ -173,7 +173,7 @@ border-style: none;
 }
 
 .sr5-biomon-physik-filled {
-  background-color: red; /* Red for filled Physik */
+  background-color: var(--health); /* Red for filled Physik */
 }
 
 .sr5-biomon-physik {
@@ -193,7 +193,7 @@ border-style: none;
 }
 
 .sr5-biomon-stun-filled {
-  background-color: blue; /* Blue for filled Stun */
+  background-color: var(--stun); /* Blue for filled Stun */
 }
 
 .sr5-biomon-stun {
