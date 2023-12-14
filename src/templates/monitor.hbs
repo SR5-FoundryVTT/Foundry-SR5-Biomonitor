@@ -27,19 +27,18 @@
       </div>
       <!--Physikal Boxes-->
       <div class="sr5-biomon-track-container">
-        {{#for 1 this.physTrack.value}}
-        <div class="sr5-biomon-physik-filled sr5-biomon-track">
-        </div>
+          {{#for 0 this.physTrack.value}}
+            <div class="sr5-biomon-physik-filled sr5-biomon-track"></div>
           {{/for}}
-          {{#for 1 this.physTrack.max-value}}
-        <div class="sr5-biomon-physik sr5-biomon-track">
-        </div>
+          {{#for this.physTrack.value this.physTrack.max}}
+            <div class="sr5-biomon-physik sr5-biomon-track"></div>
           {{/for}}
         <!--Stun Boxes-->
-          {{#for 1 (sum this.stunTrack.max 1)}}
-        <div class="sr5-biomon-stun sr5-biomon-track" title='{{this.stunTrack.value}}'>
-          {{this.stunTrack.value}}
-        </div>
+          {{#for 0 this.stunTrack.value }}
+            <div class="sr5-biomon-stun-filled sr5-biomon-track"></div>
+          {{/for}}
+          {{#for this.stunTrack.value this.stunTrack.max}}
+              <div class="sr5-biomon-stun sr5-biomon-track"></div>
           {{/for}}
       </div>
       <!--Status Section sr5-biomon-label can be removed once statuses have be sorted-->     
