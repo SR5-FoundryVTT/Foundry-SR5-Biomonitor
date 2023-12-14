@@ -10,6 +10,8 @@
   --mainHeading: rgb(189, 189, 23);
   --systemFonts: 'Signika', 'Palatino Linotype', serif;
   --editorFonts: "klavika-medium";
+  --emptyBoxBorder: rgba(255, 255, 212, 0.466);
+  --emptyBox: #f5f5dc59;
   --standardPadding: 0.25em;
   --boxShadow: 0 8px 6px -6px rgba(0, 0, 0, 0.6), /* Vertical shadow */
   8px 0 6px -6px rgba(0, 0, 0, 0.6); /* Horizontal shadow on the right */
@@ -29,7 +31,6 @@
 .sr5-biomonitor >section.window-content{
   color: whitesmoke;
   background: none;
-  background-image: none;
   }
 /*Header Label*/
 .sr5-biomon-label-headerText{
@@ -150,17 +151,15 @@ border-style: none;
 /* Container for Physik boxes */
 .sr5-biomon-physik {
   grid-row: 1; /* Physik boxes in the first row */
-  grid-column: 1 / 2;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(0.7em, 1fr)); /* Creates a flexible number of columns */
+  grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
 }
 
 /* Container for Stun boxes */
 .sr5-biomon-stun {
   grid-row: 2;
-  grid-column: 1 / 2; /* Stun boxes in the second row */
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(0.7em, 1fr)); /* Creates a flexible number of columns */
+  grid-template-columns: repeat(auto-fill, minmax(0.5em, 1fr)); /* Creates a flexible number of columns */
 }
 
 /* Styles for filled and empty Physik boxes */
@@ -168,9 +167,9 @@ border-style: none;
 .sr5-biomon-physik {
   grid-auto-columns: auto;
   grid-row: 1;
-  width: 0.7em;
-  height: 0.7em;
-  margin-right: 2px;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.2em;
 }
 
 .sr5-biomon-physik-filled {
@@ -178,7 +177,8 @@ border-style: none;
 }
 
 .sr5-biomon-physik {
-  border: 1px solid yellow; /* Yellow border for empty Physik */
+  border: 1px solid var(--emptyBoxBorder); /* Yellow border for empty Physik */
+  background: var(--emptyBox);
 }
 
 /* Styles for filled and empty Stun boxes */
@@ -186,9 +186,10 @@ border-style: none;
 .sr5-biomon-stun {
   grid-auto-columns: auto;
   grid-row: 2;
-  width: 0.7em;
-  height: 0.7em;
-  margin-right: 2px;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.2em;
+  margin-bottom: 0.2em;
 }
 
 .sr5-biomon-stun-filled {
@@ -196,7 +197,8 @@ border-style: none;
 }
 
 .sr5-biomon-stun {
-  border: 1px solid yellow; /* Yellow border for empty Stun */
+  border: 1px solid var(--emptyBoxBorder); /* Yellow border for empty Stun */
+  background: var(--emptyBox);
 }
 
 /* Position the status labels and values to the right of the image */
