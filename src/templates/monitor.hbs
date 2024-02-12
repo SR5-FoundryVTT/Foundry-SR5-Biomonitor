@@ -16,16 +16,21 @@
   </div>
   {{#each actors}}
     <div class="sr5-biomon-actors-box" actor-uuid="{{this.id}}">
-      <!--Acotor Image-->
+      <!--Actor Image-->
       <div class="image_infos">
         <div class="sr5-biomon-value sr5-biomon-name">
           {{this.name}}
         </div>
-        <div class="sr5-biomon-image">
-          <img src='{{this.image}}'>
+        <div class="sr5-biomon-image" style="background-image: url({{this.image}});">
+          {{#if heartbeat}}
+          <video class="sr5-biomon-image" autoplay loop muted poster>
+            <source src='{{heartbeat}}' type="video/webm">
+            Heartbeat
+          </video>
+          {{/if}}
         </div>
       </div>
-      <!--Physikal Boxes-->
+      <!--Physical Boxes-->
       <div class="sr5-biomon-track-container">
           {{#for 0 this.physTrack.value}}
             <div class="sr5-biomon-physik-filled sr5-biomon-track"></div>

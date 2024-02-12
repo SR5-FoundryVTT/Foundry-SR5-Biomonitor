@@ -125,6 +125,7 @@ border-style: none;
 .sr5-biomon-actors-box .image_infos .sr5-biomon-image {
   padding: 0.25em;
   object-fit: contain;
+  background-size: contain;
   overflow: hidden; /* Prevents content from spilling outside */
   & img{
     padding: 0.2em;
