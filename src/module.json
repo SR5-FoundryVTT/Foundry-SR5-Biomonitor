@@ -1,7 +1,7 @@
 {
   "id": "sr5-biomonitor",
   "title": "SR5 BioMonitor",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "compatibility": {
     "minimum": "11",
     "verified": "11"
@@ -51,7 +51,8 @@
       "flags": {}
     }
   ],
-  "url": "URL",
-  "manifest": "MANIFEST",
+  "url": "https://github.com/SR5-FoundryVTT/Foundry-SR5-Biomonitor",
+  "manifest": "https://github.com/SR5-FoundryVTT/Foundry-SR5-Biomonitor/releases/latest/download/module.json",
+  "readme": "https://github.com/SR5-FoundryVTT/Foundry-SR5-Biomonitor/blob/main/README.md",
   "download": "DOWNLOAD"
 }
