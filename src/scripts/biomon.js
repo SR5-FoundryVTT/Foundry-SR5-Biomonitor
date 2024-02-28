@@ -63,7 +63,8 @@ export default class BioMon extends Application {
                 image: ActorData.getImage(actor),
                 physTrack: ActorData.getPhysicalTrack(actor),
                 stunTrack: ActorData.getStunTrack(actor),
-                statuses: ActorData.getStatus(actor)
+                statuses: ActorData.getStatus(actor),
+                heartbeat: ActorData.getHeartbeats(actor)
             })
         });
 
