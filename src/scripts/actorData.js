@@ -28,7 +28,7 @@ export default class ActorData{
     }
 
     static getHeartbeats(actor) {
-        if(!game.modules.get("JB2A_DnD5e").active) {
+        if(!game.modules.get("JB2A_DnD5e")?.active) {
             return null;
         }
 
