@@ -4,7 +4,7 @@
   "version": "0.0.6",
   "compatibility": {
     "minimum": "11",
-    "verified": "11"
+    "verified": "12"
   },
   "relationships": {
     "systems": [
@@ -26,16 +26,6 @@
       "discord": "shadows_plays",
       "flags": {}
     }
-  ],
-  "includes": [
-    "./assets/**",
-    "./packs/**",
-    "./languages/**",
-    "./scripts/**",
-    "./styles/**",
-    "./templates/**",
-    "./module.json",
-    "./README.md"
   ],
   "esmodules": [
     "scripts/hooks.js"
