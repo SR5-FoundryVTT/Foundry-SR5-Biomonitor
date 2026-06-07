@@ -1,41 +1,45 @@
 import GetActors from './getActors.js'
 import ActorData from './actorData.js'
 
-export default class BioMon extends Application {
-    constructor() {
-        super();
+// Destructure the required V2 classes from the Foundry API
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+
+// Wrap ApplicationV2 with the Handlebars mixin to parse your .hbs templates
+export default class BioMon extends HandlebarsApplicationMixin(ApplicationV2) {
+    constructor(options) {
+        super(options);
         this.setHooks();
     }
 
-    static get defaultOptions() {
-        return {
-          ...super.defaultOptions,
-          id: "biomonitor",
-          title: "Biomonitor",
-          template: "modules/sr5-biomonitor/templates/monitor.hbs",
-          popOut: true,
-          top: 500,
-          left: 15,
-          resizable: true,
-          dragDrop: [{dragSelector: null, dropSelector: null}],
-          classes: ["sr5-biomonitor"]
+    // Replace defaultOptions with the static DEFAULT_OPTIONS property
+    static DEFAULT_OPTIONS = foundry.utils.mergeObject(super.DEFAULT_OPTIONS, {
+        id: "biomonitor",
+        classes: ["sr5-biomonitor"],
+        window: {
+            title: "Biomonitor",
+            resizable: true
+        },
+        position: {
+            top: 500,
+            left: 15,
+            width: "auto",
+            height: "auto"
         }
-      }
+    }, { inplace: false });
+
+    // V2 uses PARTS to define templates. You can have multiple parts, 
+    // but here we just need one for your main monitor interface.
+    static PARTS = {
+        monitor: {
+            template: "modules/sr5-biomonitor/templates/monitor.hbs"
+        }
+    };
 
     setHooks() {
         this.hooks = [
-            {
-                hook: "updateActor",
-                fn: this.updateBiomon.bind(this),
-            },
-            {
-                hook: "deleteActiveEffect",
-                fn: this.updateBiomon.bind(this),
-            },
-            {
-                hook: "createActiveEffect",
-                fn: this.updateBiomon.bind(this),
-            },
+            { hook: "updateActor", fn: this.updateBiomon.bind(this) },
+            { hook: "deleteActiveEffect", fn: this.updateBiomon.bind(this) },
+            { hook: "createActiveEffect", fn: this.updateBiomon.bind(this) },
         ];
         for (let hook of this.hooks) {
             hook.id = Hooks.on(hook.hook, hook.fn);
@@ -43,18 +47,26 @@ export default class BioMon extends Application {
     }
 
     updateBiomon() {
-        this.render()
+        // In V2, calling render with force: true ensures the window 
+        // updates its content properly when actor data changes
+        this.render({ force: true });
     }
 
     removeHooks() {
-        for (let hook of this.hooks) {
-            Hooks.off(hook.hook, hook.id);
+        if (this.hooks) {
+            for (let hook of this.hooks) {
+                Hooks.off(hook.hook, hook.id);
+            }
         }
     }
 
-    getData() {
-        let actors = GetActors.getActors()
-        let bioMonData = []
+    // Replace getData() with _prepareContext()
+    async _prepareContext(options) {
+        // Always grab the super context first
+        const context = await super._prepareContext(options);
+        
+        let actors = GetActors.getActors();
+        let bioMonData = [];
 
         actors.forEach(actor => {
             bioMonData.push({
@@ -65,15 +77,18 @@ export default class BioMon extends Application {
                 stunTrack: ActorData.getStunTrack(actor),
                 statuses: ActorData.getStatus(actor),
                 heartbeat: ActorData.getHeartbeats(actor)
-            })
+            });
         });
 
-        return { actors: bioMonData };
+        // Attach your data to the context object
+        context.actors = bioMonData;
+        
+        return context;
     }
 
-    async close(...args) {
+    // Replace close() with _onClose() for teardown logic
+    _onClose(options) {
         this.removeHooks();
-        this._closed = true;
-        return super.close(...args);
+        super._onClose(options);
     }
 }

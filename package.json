@@ -1,0 +1,23 @@
+{
+    "name": "sr5-biomonitor",
+    "version": "0.0.7",
+    "description": "Shadowrun 5e Biomonitor Module for Foundry VTT",
+    "type": "module",
+    "devDependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "autoprefixer": "^10.4.27",
+    "ignore": "^7.0.5",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.2",
+    "vite": "^8.0.3",
+    "vite-plugin-static-copy": "^4.0.0"
+    },
+        "scripts": {
+        "dev": "vite build --watch",
+        "build": "vite build",
+        "gen-ctx": "node helpers/generate-context.cjs"
+    },
+    "dependencies": {
+    "@tailwindcss/container-queries": "^0.1.1"
+    }
+}
