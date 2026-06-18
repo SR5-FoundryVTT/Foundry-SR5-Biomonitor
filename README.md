@@ -1,5 +1,7 @@
 ### Foundry SR5 Biomonitor ###
 
+![Biomonitor Preview](src/assets/preview.png)
+
 In Shadowrun there is an item called "Biomonitor" which allows registered devices to check the health status of the wearer. It measures heart rate and analyses blood, skin and sweat, which most people translate to showing general sets of wounds, broken bones and other artifical changes to the body same as showing poisons, drugs and other detrimental afflictions that can be found via the analyses. 
 In the basic variant cyberware is regarded as damage, while the "biomonitor implant" (Chrome Flesh) recognizes cyberware and ignores it.
 

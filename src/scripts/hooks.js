@@ -63,21 +63,3 @@ Hooks.on("getSceneControlButtons", (controls) => {
         tokenControl.tools["sr5-biomon"] = toolConfig;
     }
 });
-
-Hooks.on('renderApplication', async function(app, html) {
-  // Standardize html to a native DOM element for V14
-  const element = html instanceof jQuery ? html[0] : html;
-  if (!element) return;
-  
-  const actorBoxes = element.querySelectorAll('.sr5-biomon-actors-box');
-  
-  actorBoxes.forEach(box => {
-    box.addEventListener('click', async (ev) => {
-        const uuid = ev.currentTarget.getAttribute('actor-uuid');
-        if (uuid) {
-            const document = await fromUuid(uuid);
-            document?.sheet?.render(true);
-        }
-    });
-  });
-});
