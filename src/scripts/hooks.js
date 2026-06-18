@@ -1,42 +1,65 @@
-import BioMon from "./biomon.js"
-import Settings from "./settings.js"
-import { registerBasicHelpers } from "./handlebarHelpers.js  ";
+import '../styles/module.css'; 
+import BioMon from "./biomon.js";
+import Settings from "./settings.js";
+import { registerBasicHelpers } from "./handlebarHelpers.js"; 
 
 registerBasicHelpers();
 
-  Hooks.on("ready", () => {
-    Settings.addAllSettings();
-    ui.BIOMONITOR = new BioMon();
-  });
+Hooks.on("ready", () => {
+  Settings.addAllSettings();
+  ui.BIOMONITOR = new BioMon();
+  console.log("Bio Mon Established");
+});
 
- Hooks.on('getSceneControlButtons', (controls) => {
-   const tokenControls = controls.find((c) => c.name === 'token');
+Hooks.on("getSceneControlButtons", (controls) => {
+    
+    // 1. Safe-Guard: Normalize 'controls' to be an Array
+    let controlList = null;
+    if (Array.isArray(controls)) controlList = controls;
+    else if (typeof controls === "object" && controls !== null) controlList = Object.values(controls);
 
-   tokenControls.tools.push({
-       name: 'sr5-biomon',
-       title: 'BioMon',
-       icon: 'fas fa-heartbeat',
-       button: true
-   });
- });
+    // Fallback to ui.controls if the argument is broken
+    if (!controlList && ui.controls?.controls) {
+        controlList = Array.isArray(ui.controls.controls) ? ui.controls.controls : Object.values(ui.controls.controls);
+    }
 
- Hooks.on('renderSceneControls', (controls, html) => {
-    html.find('[data-tool="sr5-biomon"]').on('click', (event) => {
-         event.preventDefault();
-         if(ui.BIOMONITOR.rendered) {
+    if (!controlList) return;
+
+    // 2. Find the "Token" controls layer
+    const tokenControl = controlList.find(c => c.name === "token" || c.name === "tokens");
+    if (!tokenControl) return;
+
+    // 3. Define the tool action
+    const toggleBioMon = () => {
+        if (ui.BIOMONITOR.rendered) {
             ui.BIOMONITOR.close();
-         }
-         else {
-            ui.BIOMONITOR.render(true);
-         }
+        } else {
+            ui.BIOMONITOR.render({ force: true });
+        }
+    };
 
-      });
- });
+    // 4. Build the config and dynamically assign onClick/onChange
+    const toolConfig = {
+        name: "sr5-biomon",
+        title: "BioMon",
+        icon: "fas fa-heartbeat",
+        button: true
+    };
 
- Hooks.on('renderApplication', async function(actor, html) {
+    // Check the Foundry core version. V13+ uses onChange, older uses onClick.
+    if (game.release.generation >= 13) {
+        toolConfig.onChange = toggleBioMon;
+    } else {
+        toolConfig.onClick = toggleBioMon;
+    }
 
-   html.find('.sr5-biomon-actors-box').on('click', async ev => {
-      (await fromUuid(ev.currentTarget.attributes['actor-uuid'].value)).sheet?.render(true)
-   })
-
+    // 5. Safely add the tool to the list
+    if (Array.isArray(tokenControl.tools)) {
+        if (tokenControl.tools.some(tool => tool.name === "sr5-biomon")) return;
+        tokenControl.tools.push(toolConfig);
+    } 
+    else if (typeof tokenControl.tools === "object" && tokenControl.tools !== null) {
+        if (tokenControl.tools["sr5-biomon"]) return;
+        tokenControl.tools["sr5-biomon"] = toolConfig;
+    }
 });

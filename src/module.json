@@ -1,10 +1,10 @@
 {
   "id": "sr5-biomonitor",
   "title": "SR5 BioMonitor",
-  "version": "0.0.7",
+  "version": "14.0.0",
   "compatibility": {
-    "minimum": "11",
-    "verified": "12"
+    "minimum": "14",
+    "verified": "14"
   },
   "relationships": {
     "systems": [
