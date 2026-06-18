@@ -59,6 +59,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: './dist/module.json,./module.zip'
         tag: ${{ steps.get-version.outputs.version }}
+        bodyFile: 'CHANGELOG.md'
 
     # Substitute the Manifest and Download URLs for the Latest release
     - name: Substitute Manifest and Download Links For Latest
@@ -91,3 +92,4 @@ jobs:
         artifacts: './dist/module.json,./module.zip'
         tag: latest
         artifactErrorsFailBuild: true
+        bodyFile: 'CHANGELOG.md'
